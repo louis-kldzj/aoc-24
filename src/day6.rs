@@ -1,7 +1,7 @@
 use core::panic;
 use std::{collections::HashSet, str::Chars};
 
-const _INPUT: &str = "....#.....
+const INPUT: &str = "....#.....
 .........#
 ..........
 ..#.......
@@ -111,13 +111,10 @@ impl Grid {
         }
         let next_chr = self.get(next_pos);
         if next_chr == '#' {
-            if self
-                .visited_corners
-                .contains(&(self.direction, current_pos))
-            {
+            if self.visited_corners.contains(&(self.direction, next_pos)) {
                 return true;
             }
-            self.visited_corners.insert((self.direction, current_pos));
+            self.visited_corners.insert((self.direction, next_pos));
 
             self.direction = self.direction.next();
             next_pos = current_pos.add(self.direction);
@@ -132,30 +129,27 @@ impl Grid {
         }
     }
 
-    fn possible_loops(&self) -> i32 {
+    fn possible_loops(&mut self) -> i32 {
         let start = self.find('^');
 
         let mut count = 0;
-        let mut bad = 0;
         let size = self.size();
+        self.traverse_grid(start);
 
-        for y in 0..size.y {
-            for x in 0..size.x {
+        for x in 0..size.x {
+            for y in 0..size.y {
                 let pos = Vec2 { x, y };
-                if self.get(pos) == '.' {
+                if self.get(pos) == 'X' {
                     let mut clone = grid();
                     clone.update(pos, '#');
                     if clone.traverse_grid(start) {
+                        clone.update(pos, 'O');
+                        clone.print_grid();
                         count += 1;
-                    } else {
-                        bad += 1;
                     }
                 }
             }
         }
-        println!("{bad}");
-        let total = self.count('.');
-        println!("{}={}", total, count + bad);
         count
     }
 
@@ -194,11 +188,11 @@ pub fn solve_part1() -> i32 {
 }
 
 pub fn solve_part2() -> i32 {
-    let grid = grid();
+    let mut grid = grid();
     grid.possible_loops()
 }
 
-const INPUT: &str = r"........#.............................................#.........#..............#.......#....................#....................#
+const _INPUT: &str = r#"........#.............................................#.........#..............#.......#....................#....................#
 ......................#........#........................#.............##............................#.#.............#..........#..
 ....#..................................#..................#.........#....#..............#..#......................#........#...#..
 .....#...#...............#................#..........................#......#.....................#.......................#.......
@@ -327,4 +321,4 @@ const INPUT: &str = r"........#.............................................#...
 ....#..........#.....#.........................................................................................#..................
 .......#.............................#............#.........................#....#....#........#......#.....#.......#.............
 ..#.......#........................#........................#.....................................................................
-........................#...............................#.#.............#................................#..................#.....";
+........................#...............................#.#.............#................................#..................#....."#;
