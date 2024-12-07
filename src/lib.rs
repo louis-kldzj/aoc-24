@@ -4,6 +4,7 @@ mod day3;
 mod day4;
 mod day5;
 mod day6;
+mod day7;
 
 pub fn go() {
     let now = std::time::Instant::now();
@@ -15,6 +16,8 @@ pub fn go() {
     println!("Answer is: {}", day1::solve_part2());
     println!("Done in {:?}", now.elapsed());
 
+    println!();
+
     let now = std::time::Instant::now();
     println!("Day 2 - Part 1");
     println!("Answer is: {}", day2::solve_part1());
@@ -23,6 +26,8 @@ pub fn go() {
     println!("Day 2 - Part 2");
     println!("Answer is: {}", day2::solve_part2());
     println!("Done in {:?}", now.elapsed());
+
+    println!();
 
     let now = std::time::Instant::now();
     println!("Day 3 - Part 1");
@@ -33,6 +38,8 @@ pub fn go() {
     println!("Answer is: {}", day3::solve_part2());
     println!("Done in {:?}", now.elapsed());
 
+    println!();
+
     let now = std::time::Instant::now();
     println!("Day 4 - Part 1");
     println!("Answer is: {}", day4::solve_part1());
@@ -42,17 +49,32 @@ pub fn go() {
     println!("Answer is: {}", day4::solve_part2());
     println!("Done in {:?}", now.elapsed());
 
+    println!();
+
     let now = std::time::Instant::now();
     println!("Day 5 - Part 1 and 2");
     println!("Answer is: {:?}", day5::solve_part1());
     println!("Done in {:?}", now.elapsed());
+
+    println!();
 
     let now = std::time::Instant::now();
     println!("Day 6 - Part 1");
     println!("Answer is: {}", day6::solve_part1());
     println!("Done in {:?}", now.elapsed());
     let now = std::time::Instant::now();
-    println!("Day 6 - Part 2");
+    /*println!("Day 6 - Part 2");
     println!("Answer is: {}", day6::solve_part2());
+    println!("Done in {:?}", now.elapsed());*/
+
+    println!();
+
+    let now = std::time::Instant::now();
+    println!("Day 7 - Part 1");
+    println!("Answer is: {}", day7::solve_part1());
+    println!("Done in {:?}", now.elapsed());
+    let now = std::time::Instant::now();
+    println!("Day 7 - Part 2");
+    println!("Answer is: {}", day7::solve_part2());
     println!("Done in {:?}", now.elapsed());
 }
